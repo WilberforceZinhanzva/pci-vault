@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: pci-vault
+
+  profiles:
+    active: bill
+
+
+  jpa:
+    database-platform: org.hibernate.dialect.MariaDB106Dialect
+    database: MYSQL
+    hibernate:
+      ddl-auto: update
