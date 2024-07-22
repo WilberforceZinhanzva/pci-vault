@@ -3,7 +3,8 @@ spring:
     name: pci-vault
 
   profiles:
-    active: bill
+    active: local
+    default: local
 
 
   jpa:
@@ -11,3 +12,10 @@ spring:
     database: MYSQL
     hibernate:
       ddl-auto: update
+
+
+security:
+  iv: "22d2b48279af3df6"
+  key: "61f22f21-1fdc-45f1-acee-2a8a2bfc"
+
+
