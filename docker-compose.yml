@@ -2,10 +2,15 @@ version: '3'
 
 services:
 
-  betapay-core:
+  pci-vault:
     build: .
     image: wibzin/pci-vault
     container_name: pci-vault
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.pci-vault.rule=PathPrefix(`/api/pci`)"
+      - "traefik.http.routers.pci-vault.entrypoints=websecure"
+      - "traefik.http.routers.pci-vault.tls.certresolver=myresolver"
     environment:
       - "SPRING_PROFILES_ACTIVE=prod"
     ports:
