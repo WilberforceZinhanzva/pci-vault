@@ -21,4 +21,5 @@ public class EncryptedData {
    private String cardExpiryMonth;
    private String cardExpiryYear;
    private String securityCode;
+   private String cardNumber;
 }

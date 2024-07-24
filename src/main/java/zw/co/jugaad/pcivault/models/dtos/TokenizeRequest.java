@@ -9,4 +9,5 @@ public class TokenizeRequest implements Serializable {
     private String cardExpiryMonth;
     private String cardExpiryYear;
     private String securityCode;
+    private String cardNumber;
 }
