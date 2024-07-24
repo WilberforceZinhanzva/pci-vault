@@ -6,8 +6,7 @@ import java.io.Serializable;
 
 @Data
 public class TokenizeRequest implements Serializable {
-    private static final long serialVersionUID = 1L;
-    private String cardExpiry;
-    private String cardholder;
-    private String cardNumber;
+    private String cardExpiryMonth;
+    private String cardExpiryYear;
+    private String securityCode;
 }

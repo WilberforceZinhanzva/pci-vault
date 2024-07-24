@@ -4,8 +4,8 @@ import lombok.Data;
 
 @Data
 public class UnEncryptedData {
-    private String cardExpiry;
-    private String cardholder;
-    private String cardNumber;
+    private String cardExpiryMonth;
+    private String cardExpiryYear;
+    private String securityCode;
 
 }

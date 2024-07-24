@@ -18,7 +18,7 @@ public class EncryptedData {
     private Long userId;
     private String token = UUID.randomUUID().toString();
 
-   private String encryptedCardExpiry;
-   private String encryptedCardholder;
-   private String encryptedCardNumber;
+   private String cardExpiryMonth;
+   private String cardExpiryYear;
+   private String securityCode;
 }

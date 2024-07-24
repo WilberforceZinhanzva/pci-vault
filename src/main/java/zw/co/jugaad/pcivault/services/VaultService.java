@@ -12,10 +12,8 @@ import zw.co.jugaad.pcivault.models.dtos.UnEncryptedData;
 import zw.co.jugaad.pcivault.models.entities.EncryptedData;
 import zw.co.jugaad.pcivault.repositories.EncryptedDataRepository;
 import zw.co.jugaad.pcivault.util.AESUtils;
-import zw.co.jugaad.pcivault.util.AesEncryption;
 
 import javax.crypto.BadPaddingException;
-import javax.crypto.SecretKey;
 import java.util.Optional;
 
 @Slf4j
@@ -38,15 +36,15 @@ public class VaultService {
             throw new GenericException("Passphrase length should be 32");
 
         //SecretKey secretKey = AesEncryption.getKeyFromPassword(passphrase,"1234567");
-        String encryptedCardExpiry = AESUtils.encrypt(request.getCardExpiry(),passphrase,iv);
-        String encryptedCardholder = AESUtils.encrypt(request.getCardholder(),passphrase,iv);
-        String encryptedCardNumber = AESUtils.encrypt(request.getCardNumber(),passphrase,iv);
+        String cardExpiryMonth = AESUtils.encrypt(request.getCardExpiryMonth(),passphrase,iv);
+        String cardExpiryYear = AESUtils.encrypt(request.getCardExpiryYear(),passphrase,iv);
+        String securityCode = AESUtils.encrypt(request.getSecurityCode(),passphrase,iv);
 
 
         EncryptedData encryptedData = new EncryptedData();
-        encryptedData.setEncryptedCardholder(encryptedCardholder);
-        encryptedData.setEncryptedCardNumber(encryptedCardNumber);
-        encryptedData.setEncryptedCardExpiry(encryptedCardExpiry);
+        encryptedData.setCardExpiryMonth(cardExpiryMonth);
+        encryptedData.setCardExpiryYear(cardExpiryYear);
+        encryptedData.setSecurityCode(securityCode);
 
         EncryptedData savedEncryptedData = encryptedDataRepository.save(encryptedData);
 
@@ -67,13 +65,13 @@ public class VaultService {
 
         UnEncryptedData unEncryptedData = new UnEncryptedData();
         try{
-            String cardExpiry = AESUtils.decrypt(encryptedData.get().getEncryptedCardExpiry(),passphrase,iv);
-            String cardHolder = AESUtils.decrypt(encryptedData.get().getEncryptedCardholder(),passphrase,iv);
-            String cardNumber = AESUtils.decrypt(encryptedData.get().getEncryptedCardNumber(),passphrase,iv);
+            String cardExpiryMonth = AESUtils.decrypt(encryptedData.get().getCardExpiryMonth(),passphrase,iv);
+            String cardExpiryYear = AESUtils.decrypt(encryptedData.get().getCardExpiryYear(),passphrase,iv);
+            String securityCode = AESUtils.decrypt(encryptedData.get().getSecurityCode(),passphrase,iv);
 
-            unEncryptedData.setCardholder(cardHolder);
-            unEncryptedData.setCardNumber(cardNumber);
-            unEncryptedData.setCardExpiry(cardExpiry);
+            unEncryptedData.setSecurityCode(securityCode);
+            unEncryptedData.setCardExpiryYear(cardExpiryYear);
+            unEncryptedData.setCardExpiryMonth(cardExpiryMonth);
 
         }catch (BadPaddingException e){
             throw new GenericException("Wrong passphrase");
