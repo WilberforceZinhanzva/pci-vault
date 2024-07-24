@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+
+  betapay-core:
+    build: .
+    image: wibzin/pci-vault
+    container_name: pci-vault
+    environment:
+      - "SPRING_PROFILES_ACTIVE=prod"
+    ports:
+      - "9090:9090"
+    networks:
+      - beta
+
+networks:
+  beta:
+    name: betapay_default
+    external: true
